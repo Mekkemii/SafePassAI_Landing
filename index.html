@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta name="description" content="Проверьте, есть ли ваш email в утечках данных. База 10+ млрд записей">
+<meta name="keywords" content="проверить утечки, leakcheck, безопасность email">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeakGuard — Проверка утечек email и логинов</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>LeakGuard</h1>
+            <p>Проверьте, не оказались ли ваши данные в утечках</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="check-form">
+            <h2>Проверить данные</h2>
+            <form id="leakCheckForm">
+                <input type="text" id="queryInput" placeholder="Введите email или логин" required>
+                <button type="submit">Проверить</button>
+            </form>
+            <div id="result"></div>
+        </section>
+
+        <section class="features">
+            <h2>Почему стоит провериться?</h2>
+            <div class="feature-card">
+                <h3>🔒 Безопасность</h3>
+                <p>Узнайте, какие данные о вас уже слиты в сеть</p>
+            </div>
+            <div class="feature-card">
+                <h3>⚡ Быстро</h3>
+                <p>Проверка занимает менее 10 секунд</p>
+            </div>
+            <div class="feature-card">
+                <h3>📊 Надежно</h3>
+                <p>База из 10+ миллиардов записей</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 LeakGuard | <a href="/privacy">Политика конфиденциальности</a></p>
+            <p>Связь: support@leakguard.ru</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('leakCheckForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const query = document.getElementById('queryInput').value;
+            const resultDiv = document.getElementById('result');
+            
+            resultDiv.innerHTML = '<p class="loading">🔎 Проверяем данные...</p>';
+            
+            try {
+                // Здесь будет вызов вашего API (пример для LeakCheck)
+                const response = await fetch(`ВАШ_БЭКЕНД_API?query=${encodeURIComponent(query)}`);
+                const data = await response.json();
+                
+                if (data.error) {
+                    resultDiv.innerHTML = `<p class="error">❌ ${data.error}</p>`;
+                } else if (data.found === 0) {
+                    resultDiv.innerHTML = '<p class="success">✅ Утечек не найдено!</p>';
+                } else {
+                    let html = `<p class="warning">⚠️ Найдено ${data.found} утечек:</p><ul>`;
+                    data.results.slice(0, 5).forEach(leak => {
+                        html += `<li><strong>${leak.source}</strong>: ${leak.lines.join(', ')}</li>`;
+                    });
+                    html += '</ul>';
+                    resultDiv.innerHTML = html;
+                }
+            } catch (err) {
+                resultDiv.innerHTML = '<p class="error">❌ Ошибка соединения. Попробуйте позже.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
