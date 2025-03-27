@@ -1,10 +1,140 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Test</title>
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
-  </body>
-</html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SafePassAI — Проверка утечек</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="SafePassAI — проверьте, не утекли ли ваши данные в интернет. Узнайте, оказались ли ваши логины, email или пароли в утечках, и повысьте свою цифровую безопасность.">
+  <meta name="keywords" content="SafePassAI, утечки, проверка данных, цифровая безопасность, логины, email, пароли, Telegram-бот">
+  <meta name="author" content="SafePassAI">
+/* <link rel="stylesheet" href="style.css"> */
+  <style>
+    /* Общие стили */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #333;
+      color: #fff;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    main {
+      padding: 20px 0;
+    }
+    h1, h2, h3 {
+      margin: 0 0 10px;
+    }
+    p {
+      line-height: 1.6;
+    }
+    /* Скрытие пустого блока результатов */
+    #result:empty {
+      display: none;
+    }
+    /* Стикер-меню */
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #222;
+      z-index: 100;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+    .nav-left {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+    .nav-left a, .nav-left button {
+      color: #fff;
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1em;
+      padding: 5px 10px;
+    }
+    .nav-left a:hover, .nav-left button:hover {
+      text-decoration: underline;
+    }
+    .nav-right h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+    /* Кнопка переключения темы */
+    #theme-toggle {
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .light-mode #theme-toggle {
+      background-color: #0056b3;
+      color: #fff;
+    }
+    /* Заголовок под шапкой */
+    .headline {
+      text-align: center;
+      font-size: 1.8em;
+      font-weight: bold;
+      margin: 10px 0;
+      color: #fff;
+    }
+    /* Блок "Почему стоит провериться?" */
+    .features {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+      gap: 15px;
+    }
+    .feature-card {
+      background: #444;
+      padding: 20px;
+      border-radius: 8px;
+      flex: 1;
+      text-align: center;
+    }
+    /* Блок проверки утечек */
+    .check-form {
+      background: #444;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .check-form input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 4px;
+    }
+    .check-form button[type="submit"] {
+      margin-top: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      background-color: #007BFF;
+      color: #fff;
+      cursor: pointer;
+    }
+    /* Попап поддержки */
+    #donate-popup {
+      background: #555;
+      padding: 20px;
+      border-radius: 8px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
