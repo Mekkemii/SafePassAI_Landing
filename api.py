@@ -23,8 +23,7 @@ LOCAL_DICTIONARIES = [
 ]
 
 app = Flask(__name__)
-CORS(app)
-
+CORS(app, resources={r\"/*\": {\"origins\": \"*\"}})
 
 def make_api_request(query: str) -> dict:
     current_time = time.time()
