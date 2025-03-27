@@ -98,36 +98,51 @@
       <p>© 2025 SafePassAI</p>
     </div>
   </footer>
-  <script>
-    document.getElementById('leakCheckForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const query = document.getElementById('queryInput').value;
-      const resultDiv = document.getElementById('result');
-      resultDiv.innerHTML = '<p class="loading"> Проверяем данные...</p>';
-      try {
-        const response = await fetch(`https://safe-pass-api.onrender.com/check?query=${encodeURIComponent(query)}`);
-        const data = await response.json();
-        if (data.error) {
-          resultDiv.innerHTML = `<p class="error">❌ ${data.error}</p>`;
-        } else if (data.found === 0) {
-          resultDiv.innerHTML = '<p class="success">✅ Утечек не найдено!</p>';
-        } else {
-          let html = `<p class="warning">⚠️ Найдено ${data.found} утечек:</p><ul>`;
-          data.results.slice(0, 5).forEach(leak => {
-            html += `<li>
-              🔍 Источник: <strong>${leak.source}</strong><br>
-              📅 Дата: ${leak.date || 'N/A'}<br>
-              📊 Записей: ${leak.records || 'N/A'}
-            </li>`;
-          });
-          html += '</ul>';
-          resultDiv.innerHTML = html;
-        }
-      } catch (err) {
-        resultDiv.innerHTML = '<p class="error">❌ Ошибка соединения. Попробуйте позже.</p>';
+<script>
+  document.getElementById('leakCheckForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const query = document.getElementById('queryInput').value;
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = '<p class="loading"> Проверяем данные...</p>';
+    
+    console.log('Запрос отправлен, данные: ', query);
+    
+    try {
+      console.log('Начало fetch...');
+      const response = await fetch(`https://safe-pass-api.onrender.com/check?query=${encodeURIComponent(query)}`);
+      console.log('Ответ получен:', response);
+      
+      // Если статус не OK, выбрасываем ошибку
+      if (!response.ok) {
+        throw new Error(`Ошибка сервера: ${response.status}`);
       }
-    });
-  </script>
+      
+      const data = await response.json();
+      console.log('JSON данные:', data);
+      
+      if (data.error) {
+        resultDiv.innerHTML = `<p class="error">❌ ${data.error}</p>`;
+      } else if (data.found === 0) {
+        resultDiv.innerHTML = '<p class="success">✅ Утечек не найдено!</p>';
+      } else {
+        let html = `<p class="warning">⚠️ Найдено ${data.found} утечек:</p><ul>`;
+        data.results.slice(0, 5).forEach(leak => {
+          html += `<li>
+            🔍 Источник: <strong>${leak.source}</strong><br>
+            📅 Дата: ${leak.date || 'N/A'}<br>
+            📊 Записей: ${leak.records || 'N/A'}
+          </li>`;
+        });
+        html += '</ul>';
+        resultDiv.innerHTML = html;
+      }
+    } catch (err) {
+      console.error('Ошибка при получении данных:', err);
+      resultDiv.innerHTML = '<p class="error">❌ Ошибка соединения. Попробуйте позже.</p>';
+    }
+  });
+</script>
+
   <script>
     function copyCardNumber() {
       const cardText = document.getElementById("card-number").innerText;
