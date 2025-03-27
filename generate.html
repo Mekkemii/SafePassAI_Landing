@@ -71,22 +71,9 @@
     .nav-left button:hover {
       text-decoration: underline;
     }
-    /* Переопределяем отступ для кнопки поддержки в шапке */
-    .nav-left .donate-button {
-      margin-top: 0;
-    }
     .nav-right h1 {
       margin: 0;
       font-size: 2em;
-    }
-    /* Кнопка переключения темы */
-    #theme-toggle {
-      background-color: #007BFF;
-      color: #fff;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
     }
     /* Заголовок под шапкой */
     .headline {
@@ -204,12 +191,7 @@
   </style>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      var themeToggle = document.getElementById('theme-toggle');
-      if (themeToggle) {
-        themeToggle.addEventListener('click', function() {
-          document.documentElement.classList.toggle('light-mode');
-        });
-      }
+      // Обработчик для попапа поддержки
       var donateBtns = document.querySelectorAll('#donate-btn');
       donateBtns.forEach(function(btn) {
         btn.addEventListener('click', function(e) {
@@ -243,10 +225,10 @@
     <div class="navbar container">
       <div class="nav-left">
         <a href="https://t.me/SafePassAIBot" target="_blank">TG-бот</a>
+        <a href="https://safe-pass-ai-landing.vercel.app/index.html">Проверка</a>
         <a href="generate.html">Генерация надежного пароля</a>
         <a href="about.html">О проекте</a>
         <button id="donate-btn" class="donate-button">Поддержать проект</button>
-        <button id="theme-toggle">Переключить тему</button>
       </div>
       <div class="nav-right">
         <h1>SafePassAI</h1>
@@ -289,5 +271,18 @@
       <p>© 2025 SafePassAI</p>
     </div>
   </footer>
+  <script>
+    // Генерация надежного пароля при отправке формы
+    document.getElementById('passwordForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const length = parseInt(document.getElementById('passwordLength').value);
+      const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=";
+      let password = "";
+      for (let i = 0; i < length; i++) {
+        password += charset.charAt(Math.floor(Math.random() * charset.length));
+      }
+      document.getElementById('passwordResult').textContent = password;
+    });
+  </script>
 </body>
 </html>
