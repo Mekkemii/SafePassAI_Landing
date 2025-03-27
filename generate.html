@@ -10,9 +10,14 @@
   <meta name="author" content="SafePassAI">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Общие стили */
-    body {
+    /* Устанавливаем высоту для html и body, а также flex-контейнер для размещения footer внизу */
+    html, body {
+      height: 100%;
       margin: 0;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
       font-family: Arial, sans-serif;
       background-color: #333;
       color: #fff;
@@ -21,9 +26,11 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 20px;
+      flex: 1;
     }
     main {
       padding: 20px 0;
+      flex: 1;
     }
     h1, h2, h3 {
       margin: 0 0 10px;
@@ -75,11 +82,7 @@
       border-radius: 5px;
       cursor: pointer;
     }
-    .light-mode #theme-toggle {
-      background-color: #0056b3;
-      color: #fff;
-    }
-    /* Заголовок под шапкой */
+    /* Заголовок */
     .headline {
       text-align: center;
       font-size: 1.8em;
@@ -115,6 +118,12 @@
       color: #fff;
       cursor: pointer;
     }
+    /* Footer, всегда внизу */
+    footer {
+      background: #222;
+      text-align: center;
+      padding: 10px 0;
+    }
     /* Попап поддержки */
     #donate-popup {
       background: #555;
@@ -142,17 +151,46 @@
         margin-top: 10px;
       }
     }
+    /* Light mode стили */
+    .light-mode body {
+      background-color: #fff;
+      color: #333;
+    }
+    .light-mode header {
+      background-color: #f5f5f5;
+    }
+    .light-mode .navbar a,
+    .light-mode .navbar button {
+      color: #333;
+    }
+    .light-mode .headline {
+      color: #333;
+    }
+    .light-mode .password-generator {
+      background: #eee;
+      color: #333;
+    }
+    .light-mode .password-generator select {
+      background: #ddd;
+      color: #333;
+    }
+    .light-mode .password-generator button[type="submit"] {
+      background-color: #0056b3;
+      color: #fff;
+    }
+    .light-mode footer {
+      background: #f5f5f5;
+      color: #333;
+    }
   </style>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Переключение темы
       var themeToggle = document.getElementById('theme-toggle');
       if (themeToggle) {
         themeToggle.addEventListener('click', function() {
           document.documentElement.classList.toggle('light-mode');
         });
       }
-      // Открытие попапа поддержки
       var donateBtns = document.querySelectorAll('#donate-btn');
       donateBtns.forEach(function(btn) {
         btn.addEventListener('click', function(e) {
@@ -173,6 +211,12 @@
         });
       }
     });
+    function copyCardNumber() {
+      var cardText = document.getElementById("card-number").innerText;
+      navigator.clipboard.writeText(cardText).then(function() {
+        alert("Номер карты скопирован!");
+      });
+    }
   </script>
 </head>
 <body>
@@ -226,27 +270,5 @@
       <p>© 2025 SafePassAI</p>
     </div>
   </footer>
-  <script>
-    document.getElementById('passwordForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      var length = parseInt(document.getElementById('passwordLength').value);
-      var password = generatePassword(length);
-      document.getElementById('passwordResult').innerText = "Ваш пароль: " + password;
-    });
-    function generatePassword(length) {
-      var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=";
-      var retVal = "";
-      for (var i = 0; i < length; i++) {
-        retVal += charset.charAt(Math.floor(Math.random() * charset.length));
-      }
-      return retVal;
-    }
-    function copyCardNumber() {
-      var cardText = document.getElementById("card-number").innerText;
-      navigator.clipboard.writeText(cardText).then(function() {
-        alert("Номер карты скопирован!");
-      });
-    }
-  </script>
 </body>
 </html>
