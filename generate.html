@@ -8,43 +8,33 @@
   <meta name="description" content="Генератор надежных паролей. Выберите длину пароля (8, 12, 16, 20 символов) и получите случайно сгенерированный надежный пароль.">
   <meta name="keywords" content="генератор паролей, надежный пароль, SafePassAI, генерация пароля, безопасность">
   <meta name="author" content="SafePassAI">
+  <!-- Если внешний файл стилей не требуется, его можно удалить, чтобы избежать конфликтов -->
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Устанавливаем полную высоту и flex-контейнер для прилипания footer */
+    /* Общие стили контейнера */
     html, body {
       height: 100%;
       margin: 0;
     }
     body {
-      display: flex;
-      flex-direction: column;
       font-family: Arial, sans-serif;
       background-color: #333;
       color: #fff;
+      display: flex;
+      flex-direction: column;
     }
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 20px;
-      flex: 1;
     }
-    main {
-      padding: 20px 0;
-      flex: 1;
-    }
-    h1, h2, h3 {
-      margin: 0 0 10px;
-    }
-    p {
-      line-height: 1.6;
-    }
-    /* Стикер-меню */
+    /* Стили шапки, идентичные index.html */
     header {
+      background-color: #222;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
       position: sticky;
       top: 0;
-      background-color: #222;
       z-index: 100;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
     .navbar {
       display: flex;
@@ -75,7 +65,6 @@
       margin: 0;
       font-size: 2em;
     }
-    /* Заголовок под шапкой */
     .headline {
       text-align: center;
       font-size: 1.8em;
@@ -83,7 +72,11 @@
       margin: 10px 0;
       color: #fff;
     }
-    /* Блок генератора паролей */
+    /* Стили блока генератора паролей */
+    main {
+      flex: 1;
+      padding: 20px 0;
+    }
     .password-generator {
       background: #444;
       padding: 20px;
@@ -111,13 +104,13 @@
       color: #fff;
       cursor: pointer;
     }
-    /* Footer */
+    /* Стили подвала */
     footer {
       background: #222;
       text-align: center;
       padding: 10px 0;
     }
-    /* Попап поддержки */
+    /* Стили попапа поддержки */
     #donate-popup {
       background: #555;
       padding: 20px;
@@ -142,7 +135,7 @@
     #donate-popup button:hover {
       background: #00d5cc;
     }
-    /* Адаптивная верстка */
+    /* Адаптив */
     @media (max-width: 768px) {
       .navbar {
         flex-direction: column;
@@ -157,41 +150,10 @@
         margin-top: 10px;
       }
     }
-    /* Light mode стили */
-    .light-mode body {
-      background-color: #fff;
-      color: #333;
-    }
-    .light-mode header {
-      background-color: #f5f5f5;
-    }
-    .light-mode .navbar a,
-    .light-mode .navbar button {
-      color: #333;
-    }
-    .light-mode .headline {
-      color: #333;
-    }
-    .light-mode .password-generator {
-      background: #eee;
-      color: #333;
-    }
-    .light-mode .password-generator select {
-      background: #ddd;
-      color: #333;
-    }
-    .light-mode .password-generator button[type="submit"] {
-      background-color: #0056b3;
-      color: #fff;
-    }
-    .light-mode footer {
-      background: #f5f5f5;
-      color: #333;
-    }
   </style>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Обработчик для попапа поддержки
+      // Обработка показа попапа поддержки
       var donateBtns = document.querySelectorAll('#donate-btn');
       donateBtns.forEach(function(btn) {
         btn.addEventListener('click', function(e) {
@@ -272,7 +234,7 @@
     </div>
   </footer>
   <script>
-    // Генерация надежного пароля при отправке формы
+    // Генерация надежного пароля
     document.getElementById('passwordForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const length = parseInt(document.getElementById('passwordLength').value);
