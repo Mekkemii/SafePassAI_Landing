@@ -115,7 +115,7 @@
       resultDiv.innerHTML = '<p class="loading">🔎 Проверяем данные...</p>';
 
       try {
-        const response = await fetch(`ВАШ_БЭКЕНД_API?query=${encodeURIComponent(query)}`);
+        const response = await fetch(`https://safe-pass-api.onrender.com/check?query=${encodeURIComponent(query)}`);
         const data = await response.json();
 
         if (data.error) {
