@@ -31,74 +31,67 @@
     p {
       line-height: 1.6;
     }
-    /* Верхняя шапка */
+    /* Стикер-меню */
     header {
+      position: sticky;
+      top: 0;
       background-color: #222;
-      padding: 10px 0;
+      z-index: 100;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
-    header .container {
+    .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 10px 20px;
     }
-    header .header-left {
+    .nav-left {
       display: flex;
-      flex-direction: column;
+      gap: 15px;
+      align-items: center;
     }
-    header .header-left h1 {
-      font-size: 2.5em;
-      margin: 0;
-    }
-    header .header-left a {
+    .nav-left a, .nav-left button {
       color: #fff;
-      font-weight: bold;
-      text-decoration: underline;
-      margin-top: 5px;
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1em;
+      padding: 5px 10px;
     }
-    header .header-right {
-      text-align: right;
+    .nav-left a:hover, .nav-left button:hover {
+      text-decoration: underline;
+    }
+    .nav-right h1 {
+      margin: 0;
+      font-size: 2em;
     }
     /* Кнопка переключения темы */
     #theme-toggle {
       background-color: #007BFF;
       color: #fff;
       border: none;
-      padding: 10px 20px;
+      padding: 5px 10px;
       border-radius: 5px;
       cursor: pointer;
-      font-size: 1em;
     }
     .light-mode #theme-toggle {
       background-color: #0056b3;
-      color: #fff;
-    }
-    /* Заголовок под шапкой */
-    .headline {
-      text-align: center;
-      font-size: 1.8em;
-      font-weight: bold;
-      margin: 10px 0;
       color: #fff;
     }
     /* Блок "Почему стоит провериться?" */
     .features {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 20px;
+      margin: 20px 0;
+      gap: 15px;
     }
     .feature-card {
       background: #444;
       padding: 20px;
       border-radius: 8px;
       flex: 1;
-      margin: 0 10px;
       text-align: center;
-    }
-    .feature-card:first-child {
-      margin-left: 0;
-    }
-    .feature-card:last-child {
-      margin-right: 0;
     }
     /* Блок проверки утечек */
     .check-form {
@@ -140,43 +133,45 @@
       left: 50%;
       transform: translate(-50%, -50%);
       z-index: 1000;
+      display: none;
     }
     /* Адаптивная верстка */
     @media (max-width: 768px) {
-      header .container {
+      .navbar {
         flex-direction: column;
         align-items: flex-start;
       }
-      header .header-right {
+      .nav-left {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .nav-right {
+        align-self: center;
         margin-top: 10px;
-        width: 100%;
-        text-align: left;
       }
       .features {
         flex-direction: column;
-      }
-      .feature-card {
-        margin: 10px 0;
       }
     }
   </style>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      var toggle = document.getElementById('theme-toggle');
-      if (toggle) {
-        toggle.addEventListener('click', function() {
+      var themeToggle = document.getElementById('theme-toggle');
+      if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
           document.documentElement.classList.toggle('light-mode');
         });
       }
-      var donateBtn = document.getElementById('donate-btn');
-      if (donateBtn) {
-        donateBtn.addEventListener('click', function() {
+      var donateBtns = document.querySelectorAll('#donate-btn');
+      donateBtns.forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
           var donatePopup = document.getElementById('donate-popup');
           if (donatePopup) {
             donatePopup.style.display = 'block';
           }
         });
-      }
+      });
       var donateClose = document.getElementById('donate-close');
       if (donateClose) {
         donateClose.addEventListener('click', function() {
@@ -191,17 +186,17 @@
 </head>
 <body>
   <header>
-    <div class="container">
-      <div class="header-left">
-        <h1>SafePassAI</h1>
-        <a href="https://t.me/SafePassAIBot">Наш Telegram-бот @SafePassAIBot</a>
-      </div>
-      <div class="header-right">
+    <div class="navbar container">
+      <div class="nav-left">
+        <a href="https://t.me/SafePassAIBot" target="_blank">TG-бот</a>
+        <a href="generate.html">Генерация надежного пароля</a>
+        <a href="about.html">О проекте</a>
+        <a href="#" id="donate-btn">Поддержать проект</a>
         <button id="theme-toggle">Переключить тему</button>
       </div>
-    </div>
-    <div class="container">
-      <p class="headline">Проверьте, не оказались ли ваши данные в утечках</p>
+      <div class="nav-right">
+        <h1>SafePassAI</h1>
+      </div>
     </div>
   </header>
   <main class="container">
@@ -266,7 +261,7 @@
     <div style="text-align:center">
       <button id="donate-btn" class="donate-button">❤️ Поддержать проект</button>
     </div>
-    <div id="donate-popup" style="display:none; animation: fadeInPopup 0.3s ease-out;">
+    <div id="donate-popup">
       <h3>Спасибо за вашу поддержку!</h3>
       <p>Вы можете поддержать проект переводом на карту:</p>
       <p style="font-size: 20px;"><strong id="card-number">2200 7007 3707 5779</strong></p>
