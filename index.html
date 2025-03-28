@@ -106,7 +106,7 @@
           var data = await response.json();
 var html = '';
 if (data && data.found) {
-  html = '<p class="success">Найдены утечки: ' + data.count + '</p>';
+  html = '<p class="success">Найдены утечки: ' + data.found + '</p>';
 } else {
   html = '<p class="warning">Утечек не обнаружено</p>';
 }
