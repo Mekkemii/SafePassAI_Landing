@@ -105,11 +105,23 @@
           var data = await response.json();
           console.log(data); // Вывод данных для отладки
           var html = '';
-          if (data && data.found) {
-            html = '<p class="success">Найдены утечки: ' + data.found + '</p>';
-          } else {
-            html = '<p class="warning">Утечек не обнаружено</p>';
-          }
+         if (data && data.found) {
+  // Общий заголовок
+  html = '<p class="success">Найдены утечки: ' + data.found + '</p>';
+
+  // Если в ответе есть массив с деталями
+  if (data.results && data.results.length > 0) {
+    html += '<ul>';
+    data.results.forEach(item => {
+      // Предположим, в каждом элементе есть поля "name" и "date"
+      html += '<li>' + item.name + ' — ' + item.date + '</li>';
+    });
+    html += '</ul>';
+  }
+
+} else {
+  html = '<p class="warning">Утечек не обнаружено</p>';
+}
           resultDiv.innerHTML = html;
         } catch (err) {
           resultDiv.innerHTML = '<p class="error">Ошибка соединения.</p>';
