@@ -11,10 +11,7 @@
 <body>
   <header>
     <div class="navbar container">
-      <!-- Кнопка-бургер -->
       <button class="hamburger" id="hamburgerBtn">☰</button>
-
-      <!-- Блок ссылок -->
       <div class="nav-left" id="navMenu">
         <a href="https://t.me/SafePassAIBot" target="_blank">TG-бот</a>
         <a href="index.html">Проверка</a>
@@ -22,8 +19,6 @@
         <a href="about.html">О проекте</a>
         <button id="donate-btn" class="donate-button">Поддержать проект</button>
       </div>
-
-      <!-- Блок заголовка -->
       <div class="nav-right">
         <h1>SafePassAI</h1>
       </div>
@@ -58,7 +53,6 @@
       <button id="donate-btn" class="donate-button">❤️ Поддержать проект</button>
     </div>
 
-    <!-- Попап поддержки -->
     <div id="donate-popup">
       <h3>Спасибо за вашу поддержку!</h3>
       <p>Поддержите проект переводом на карту:</p>
@@ -77,7 +71,6 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Кнопки "Поддержать проект" и попап
       var donateBtns = document.querySelectorAll('#donate-btn');
       donateBtns.forEach(function(btn) {
         btn.addEventListener('click', function(e) {
@@ -88,15 +81,12 @@
       document.getElementById('donate-close').addEventListener('click', function() {
         document.getElementById('donate-popup').style.display = 'none';
       });
-
-      // Бургер-меню
       var hamburgerBtn = document.getElementById('hamburgerBtn');
       var navMenu = document.getElementById('navMenu');
       hamburgerBtn.addEventListener('click', function() {
         navMenu.classList.toggle('open');
       });
     });
-
     function copyCardNumber() {
       var cardText = document.getElementById("card-number").innerText;
       navigator.clipboard.writeText(cardText).then(function() {
