@@ -102,11 +102,15 @@
         try {
           var response = await fetch('https://safe-pass-api.onrender.com/check?query=' + encodeURIComponent(query));
           if (!response.ok) throw new Error('Ошибка сервера');
+       
           var data = await response.json();
-          var html = '';
-          // Здесь обработка полученных данных (data) при необходимости
-          // ...
-          resultDiv.innerHTML = html;
+var html = '';
+if (data && data.found) {
+  html = '<p class="success">Найдены утечки: ' + data.count + '</p>';
+} else {
+  html = '<p class="warning">Утечек не обнаружено</p>';
+}
+resultDiv.innerHTML = html;
         } catch (err) {
           resultDiv.innerHTML = '<p class="error">Ошибка соединения.</p>';
         }
