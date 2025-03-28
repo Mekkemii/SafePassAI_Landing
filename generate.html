@@ -4,191 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Генерация надежного пароля — SafePassAI</title>
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="Генератор надежных паролей. Выберите длину пароля (8, 12, 16, 20 символов) и получите случайно сгенерированный надежный пароль.">
-  <meta name="keywords" content="генератор паролей, надежный пароль, SafePassAI, генерация пароля, безопасность">
-  <meta name="author" content="SafePassAI">
-  <!-- Если внешний файл стилей не требуется, его можно удалить, чтобы избежать конфликтов -->
+  <meta name="description" content="Генератор надежных паролей. Выберите длину пароля и получите сгенерированный надежный пароль.">
+  <meta name="keywords" content="генератор паролей, надежный пароль, SafePassAI">
   <link rel="stylesheet" href="style.css">
-  <style>
-    /* Общие стили контейнера */
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #333;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-    /* Стили шапки, идентичные index.html */
-    header {
-      background-color: #222;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-    }
-    .nav-left {
-      display: flex;
-      gap: 15px;
-      align-items: center;
-    }
-    .nav-left a,
-    .nav-left button {
-      color: #fff;
-      text-decoration: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1em;
-      padding: 5px 10px;
-    }
-    .nav-left a:hover,
-    .nav-left button:hover {
-      text-decoration: underline;
-    }
-    .nav-right h1 {
-      margin: 0;
-      font-size: 2em;
-    }
-    .headline {
-      text-align: center;
-      font-size: 1.8em;
-      font-weight: bold;
-      margin: 10px 0;
-      color: #fff;
-    }
-    /* Стили блока генератора паролей */
-    main {
-      flex: 1;
-      padding: 20px 0;
-    }
-    .password-generator {
-      background: #444;
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-    .password-generator form {
-      margin-top: 10px;
-    }
-    .password-generator select,
-    .password-generator button[type="submit"] {
-      padding: 10px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 4px;
-      font-size: 1em;
-    }
-    .password-generator select {
-      width: 100%;
-      background: #555;
-      color: #fff;
-    }
-    .password-generator button[type="submit"] {
-      background-color: #007BFF;
-      color: #fff;
-      cursor: pointer;
-    }
-    /* Стили подвала */
-    footer {
-      background: #222;
-      text-align: center;
-      padding: 10px 0;
-    }
-    /* Стили попапа поддержки */
-    #donate-popup {
-      background: #555;
-      padding: 20px;
-      border-radius: 8px;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 1000;
-      display: none;
-      text-align: center;
-    }
-    #donate-popup button {
-      margin-top: 20px;
-      background: #00bfae;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 4px;
-      cursor: pointer;
-      color: #fff;
-    }
-    #donate-popup button:hover {
-      background: #00d5cc;
-    }
-    /* Адаптив */
-    @media (max-width: 768px) {
-      .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .nav-left {
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-      .nav-right {
-        align-self: center;
-        margin-top: 10px;
-      }
-    }
-  </style>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Обработка показа попапа поддержки
-      var donateBtns = document.querySelectorAll('#donate-btn');
-      donateBtns.forEach(function(btn) {
-        btn.addEventListener('click', function(e) {
-          e.preventDefault();
-          var donatePopup = document.getElementById('donate-popup');
-          if (donatePopup) {
-            donatePopup.style.display = 'block';
-          }
-        });
-      });
-      var donateClose = document.getElementById('donate-close');
-      if (donateClose) {
-        donateClose.addEventListener('click', function() {
-          var donatePopup = document.getElementById('donate-popup');
-          if (donatePopup) {
-            donatePopup.style.display = 'none';
-          }
-        });
-      }
-    });
-    function copyCardNumber() {
-      var cardText = document.getElementById("card-number").innerText;
-      navigator.clipboard.writeText(cardText).then(function() {
-        alert("Номер карты скопирован!");
-      });
-    }
-  </script>
 </head>
 <body>
   <header>
     <div class="navbar container">
       <div class="nav-left">
         <a href="https://t.me/SafePassAIBot" target="_blank">TG-бот</a>
-        <a href="https://safe-pass-ai-landing.vercel.app/index.html">Проверка</a>
-        <a href="generate.html">Генерация надежного пароля</a>
+        <a href="index.html">Проверка</a>
+        <a href="generate.html">Генерация пароля</a>
         <a href="about.html">О проекте</a>
         <button id="donate-btn" class="donate-button">Поддержать проект</button>
       </div>
@@ -200,8 +26,9 @@
       <p class="headline">Генератор надежных паролей</p>
     </div>
   </header>
+
   <main class="container">
-    <section class="password-generator">
+    <section class="card password-generator">
       <h2>Генерация надежного пароля</h2>
       <p>Выберите желаемую длину пароля и нажмите «Сгенерировать». Доступные варианты: 8, 12, 16, 20 символов.</p>
       <form id="passwordForm">
@@ -214,37 +41,66 @@
         </select>
         <button type="submit">Сгенерировать</button>
       </form>
-      <div id="passwordResult" style="margin-top: 20px; font-size: 1.2em;"></div>
+      <div id="passwordResult"></div>
     </section>
+
     <div style="text-align:center">
       <button id="donate-btn" class="donate-button">❤️ Поддержать проект</button>
     </div>
+
+    <!-- Попап поддержки -->
     <div id="donate-popup">
       <h3>Спасибо за вашу поддержку!</h3>
-      <p>Вы можете поддержать проект переводом на карту:</p>
+      <p>Поддержите проект переводом на карту:</p>
       <p style="font-size: 20px;"><strong id="card-number">2200 7007 3707 5779</strong></p>
       <button onclick="copyCardNumber()">Скопировать номер карты</button>
-      <p style="margin-top:10px">Любая сумма важна</p>
+      <p>Любая сумма важна</p>
       <button id="donate-close">Закрыть</button>
     </div>
   </main>
+
   <footer>
     <div class="container">
       <p>© 2025 SafePassAI</p>
     </div>
   </footer>
+
   <script>
-    // Генерация надежного пароля
-    document.getElementById('passwordForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const length = parseInt(document.getElementById('passwordLength').value);
-      const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=";
-      let password = "";
-      for (let i = 0; i < length; i++) {
-        password += charset.charAt(Math.floor(Math.random() * charset.length));
-      }
-      document.getElementById('passwordResult').textContent = password;
+    document.addEventListener('DOMContentLoaded', function() {
+      var donateBtns = document.querySelectorAll('#donate-btn');
+      donateBtns.forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.getElementById('donate-popup').style.display = 'block';
+        });
+      });
+      document.getElementById('donate-close').addEventListener('click', function() {
+        document.getElementById('donate-popup').style.display = 'none';
+      });
+
+      document.getElementById('passwordForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var length = parseInt(document.getElementById('passwordLength').value, 10);
+        var password = generatePassword(length);
+        document.getElementById('passwordResult').innerText = password;
+      });
     });
+
+    function generatePassword(length) {
+      var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=";
+      var password = "";
+      for (var i = 0, n = charset.length; i < length; i++) {
+        password += charset.charAt(Math.floor(Math.random() * n));
+      }
+      return password;
+    }
+
+    function copyCardNumber() {
+      var cardText = document.getElementById("card-number").innerText;
+      navigator.clipboard.writeText(cardText).then(function() {
+        alert("Номер карты скопирован!");
+      });
+    }
   </script>
 </body>
 </html>
