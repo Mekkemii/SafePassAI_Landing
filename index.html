@@ -81,7 +81,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Кнопки "Поддержать проект" и попап
+      // Обработка кнопок "Поддержать проект" и попапа
       var donateBtns = document.querySelectorAll('#donate-btn');
       donateBtns.forEach(function(btn) {
         btn.addEventListener('click', function(e) {
@@ -102,16 +102,15 @@
         try {
           var response = await fetch('https://safe-pass-api.onrender.com/check?query=' + encodeURIComponent(query));
           if (!response.ok) throw new Error('Ошибка сервера');
-       
           var data = await response.json();
-var html = '';
-if (data && data.found) {
-  html = '<p class="success">Найдены утечки: ' + data.found + '</p>';
-} else {
-  html = '<p class="warning">Утечек не обнаружено</p>';
-}
-
-resultDiv.innerHTML = html;
+          console.log(data); // Вывод данных для отладки
+          var html = '';
+          if (data && data.found) {
+            html = '<p class="success">Найдены утечки: ' + data.found + '</p>';
+          } else {
+            html = '<p class="warning">Утечек не обнаружено</p>';
+          }
+          resultDiv.innerHTML = html;
         } catch (err) {
           resultDiv.innerHTML = '<p class="error">Ошибка соединения.</p>';
         }
