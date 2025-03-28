@@ -78,6 +78,17 @@ header {
   font-size: 2em;
 }
 
+/* Кнопка-бургер (по умолчанию скрыта на больших экранах) */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2em;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
 /* Заголовок под шапкой */
 .headline {
   text-align: center;
@@ -86,7 +97,7 @@ header {
   margin: 20px 0;
 }
 
-/* Унифицированный стиль карточек для основных блоков */
+/* Унифицированный стиль карточек */
 .card {
   background: var(--card-background);
   padding: 20px;
@@ -166,6 +177,8 @@ button:hover {
   box-shadow: var(--shadow);
   text-align: center;
   z-index: 1000;
+  width: 90%;
+  max-width: 400px;
 }
 
 #donate-popup button {
@@ -220,13 +233,39 @@ footer {
   color: #333;
 }
 
-/* Адаптив */
+/* Адаптив для мобильных устройств */
 @media (max-width: 768px) {
-  .navbar {
+  /* Показываем бургер на мобильных */
+  .hamburger {
+    display: block;
+  }
+
+  /* По умолчанию скрываем меню */
+  .nav-left {
+    display: none;
     flex-direction: column;
-    align-items: flex-start;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Когда меню "открыто" (через JS-класс .open), делаем flex */
+  .nav-left.open {
+    display: flex;
+  }
+
+  .nav-left a,
+  .nav-left button {
+    margin: 10px 0;
+    font-size: 1em;
+  }
+
+  /* Корректируем отступы и расположение */
+  .navbar {
+    flex-wrap: wrap;
   }
   .nav-right {
     margin-top: 10px;
+    width: 100%;
+    text-align: center;
   }
 }
