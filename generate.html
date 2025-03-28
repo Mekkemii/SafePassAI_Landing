@@ -11,13 +11,19 @@
 <body>
   <header>
     <div class="navbar container">
-      <div class="nav-left">
+      <!-- Кнопка-бургер -->
+      <button class="hamburger" id="hamburgerBtn">☰</button>
+
+      <!-- Блок ссылок -->
+      <div class="nav-left" id="navMenu">
         <a href="https://t.me/SafePassAIBot" target="_blank">TG-бот</a>
         <a href="index.html">Проверка</a>
         <a href="generate.html">Генерация пароля</a>
         <a href="about.html">О проекте</a>
         <button id="donate-btn" class="donate-button">Поддержать проект</button>
       </div>
+
+      <!-- Блок заголовка -->
       <div class="nav-right">
         <h1>SafePassAI</h1>
       </div>
@@ -64,6 +70,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // Кнопки "Поддержать проект" и попап
       var donateBtns = document.querySelectorAll('#donate-btn');
       donateBtns.forEach(function(btn) {
         btn.addEventListener('click', function(e) {
@@ -75,22 +82,30 @@
         document.getElementById('donate-popup').style.display = 'none';
       });
 
+      // Форма генерации пароля
       document.getElementById('passwordForm').addEventListener('submit', function(e) {
         e.preventDefault();
         var length = parseInt(document.getElementById('passwordLength').value, 10);
         var password = generatePassword(length);
         document.getElementById('passwordResult').innerText = password;
       });
-    });
 
-    function generatePassword(length) {
-      var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=";
-      var password = "";
-      for (var i = 0, n = charset.length; i < length; i++) {
-        password += charset.charAt(Math.floor(Math.random() * n));
+      function generatePassword(length) {
+        var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=";
+        var password = "";
+        for (var i = 0, n = charset.length; i < length; i++) {
+          password += charset.charAt(Math.floor(Math.random() * n));
+        }
+        return password;
       }
-      return password;
-    }
+
+      // Бургер-меню
+      var hamburgerBtn = document.getElementById('hamburgerBtn');
+      var navMenu = document.getElementById('navMenu');
+      hamburgerBtn.addEventListener('click', function() {
+        navMenu.classList.toggle('open');
+      });
+    });
 
     function copyCardNumber() {
       var cardText = document.getElementById("card-number").innerText;
