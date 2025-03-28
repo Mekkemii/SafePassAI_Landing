@@ -4,201 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SafePassAI — Проверка утечек</title>
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="SafePassAI — проверьте, не утекли ли ваши данные в интернет. Узнайте, оказались ли ваши логины, email или пароли в утечках, и повысьте свою цифровую безопасность.">
-  <meta name="keywords" content="SafePassAI, утечки, проверка данных, цифровая безопасность, логины, email, пароли, Telegram-бот">
-  <meta name="author" content="SafePassAI">
-
-  <style>
-    /* Базовые стили */
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #333; /* Тёмный фон */
-      color: #fff;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-    h1, h2, h3 {
-      margin: 0 0 10px;
-    }
-    p {
-      line-height: 1.6;
-    }
-
-    /* Скрытие пустого блока результатов */
-    #result:empty {
-      display: none;
-    }
-
-    /* Шапка с навигацией */
-    header {
-      background-color: #222;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-      position: sticky; /* Чтобы шапка оставалась сверху при прокрутке */
-      top: 0;
-      z-index: 100;
-    }
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-    }
-    .nav-left {
-      display: flex;
-      gap: 15px;
-      align-items: center;
-    }
-    .nav-left a,
-    .nav-left button {
-      color: #fff;
-      text-decoration: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1em;
-      padding: 5px 10px;
-    }
-    .nav-left a:hover,
-    .nav-left button:hover {
-      text-decoration: underline;
-    }
-    .nav-right h1 {
-      margin: 0;
-      font-size: 2em;
-    }
-
-    /* Кнопка переключения темы (при необходимости) */
-    #theme-toggle {
-      background-color: #007BFF;
-      color: #fff;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    /* Заголовок под шапкой */
-    .headline {
-      text-align: center;
-      font-size: 1.8em;
-      font-weight: bold;
-      margin: 10px 0;
-      color: #fff;
-    }
-
-    /* Блок "Почему стоит провериться?" */
-    .features {
-      display: flex;
-      justify-content: space-between;
-      margin: 20px 0;
-      gap: 15px;
-    }
-    .feature-card {
-      background: #444;
-      padding: 20px;
-      border-radius: 8px;
-      flex: 1;
-      text-align: center;
-    }
-
-    /* Блок проверки утечек */
-    .check-form {
-      background: #444;
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-    .check-form input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 4px;
-    }
-    .check-form button[type="submit"] {
-      margin-top: 10px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 4px;
-      background-color: #007BFF;
-      color: #fff;
-      cursor: pointer;
-    }
-
-    /* Кнопка "Поддержать проект" */
-    .donate-button {
-      background: transparent;
-      border: 2px solid #ff3b3f;
-      color: #ff3b3f;
-      padding: 10px 20px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .donate-button:hover {
-      background: #ff3b3f;
-      color: white;
-    }
-
-    /* Попап поддержки (скрыт по умолчанию) */
-    #donate-popup {
-      display: none; /* <-- скрыто по умолчанию */
-      background: #555;
-      padding: 20px;
-      border-radius: 8px;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 1000;
-      text-align: center;
-    }
-    #donate-popup button {
-      margin-top: 20px;
-      background: #00bfae;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 4px;
-      cursor: pointer;
-      color: #fff;
-    }
-    #donate-popup button:hover {
-      background: #00d5cc;
-    }
-
-    /* Подвал */
-    footer {
-      text-align: center; /* Выравнивание текста по центру */
-      padding: 20px 0;
-      background: #222;
-      color: #fff;
-      margin-top: 20px;
-    }
-
-    /* Адаптивная верстка */
-    @media (max-width: 768px) {
-      .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .nav-left {
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-      .nav-right {
-        align-self: center;
-        margin-top: 10px;
-      }
-      .features {
-        flex-direction: column;
-      }
-    }
-  </style>
+  <meta name="description" content="SafePassAI — проверьте, не утекли ли ваши данные в интернет.">
+  <meta name="keywords" content="SafePassAI, утечки, проверка данных, цифровая безопасность">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
@@ -206,11 +14,9 @@
       <div class="nav-left">
         <a href="https://t.me/SafePassAIBot" target="_blank">TG-бот</a>
         <a href="index.html">Проверка</a>
-        <a href="generate.html">Генерация надежного пароля</a>
+        <a href="generate.html">Генерация пароля</a>
         <a href="about.html">О проекте</a>
         <button id="donate-btn" class="donate-button">Поддержать проект</button>
-        <!-- Если нужно переключение темы, раскомментируйте -->
-        <!-- <button id="theme-toggle">Переключить тему</button> -->
       </div>
       <div class="nav-right">
         <h1>SafePassAI</h1>
@@ -222,8 +28,8 @@
   </header>
 
   <main class="container">
-    <!-- Блок "Почему стоит провериться?" -->
-    <section class="features">
+    <!-- Блок с особенностями -->
+    <section class="card features">
       <div class="feature-card">
         <h3>Безопасность</h3>
         <p>Узнайте, какие данные о вас уже слиты в сеть</p>
@@ -238,19 +44,12 @@
       </div>
     </section>
 
-    <!-- Блок проверки утечек -->
-    <section class="check-form">
+    <!-- Форма проверки утечек -->
+    <section class="card check-form">
       <h2>Проверка утечек</h2>
-      <p>
-        Введите данные для проверки на утечки. Например:
-        <br><strong>Имя</strong>: Иван Иванович
-        <br><strong>Компания</strong>: Микрософт
-        <br><strong>Почта</strong>: example@mail.ru
-        <br><strong>Пароль</strong>: MyPassword123
-        <br><strong>Никнейм</strong>: @ваш ник
-      </p>
+      <p>Введите данные для проверки на утечки:</p>
       <form id="leakCheckForm">
-        <input type="text" id="queryInput" placeholder="Введите данные для проверки..." required>
+        <input type="text" id="queryInput" placeholder="Введите данные..." required>
         <button type="submit">Проверить</button>
       </form>
       <div id="result"></div>
@@ -260,109 +59,54 @@
       <button id="donate-btn" class="donate-button">❤️ Поддержать проект</button>
     </div>
 
-    <!-- Попап поддержки (изначально скрыт) -->
+    <!-- Попап поддержки -->
     <div id="donate-popup">
       <h3>Спасибо за вашу поддержку!</h3>
-      <p>Вы можете поддержать проект переводом на карту:</p>
+      <p>Поддержите проект переводом на карту:</p>
       <p style="font-size: 20px;"><strong id="card-number">2200 7007 3707 5779</strong></p>
       <button onclick="copyCardNumber()">Скопировать номер карты</button>
-      <p style="margin-top:10px">Любая сумма важна</p>
+      <p>Любая сумма важна</p>
       <button id="donate-close">Закрыть</button>
     </div>
   </main>
 
   <footer>
-    <p>© 2025 SafePassAI</p>
+    <div class="container">
+      <p>© 2025 SafePassAI</p>
+    </div>
   </footer>
 
   <script>
-    // Скрывать/показывать попап
     document.addEventListener('DOMContentLoaded', function() {
-      var donateBtnAll = document.querySelectorAll('#donate-btn');
-      donateBtnAll.forEach(function(btn) {
+      var donateBtns = document.querySelectorAll('#donate-btn');
+      donateBtns.forEach(function(btn) {
         btn.addEventListener('click', function(e) {
           e.preventDefault();
-          var popup = document.getElementById('donate-popup');
-          if (popup) {
-            popup.style.display = 'block';
-          }
+          document.getElementById('donate-popup').style.display = 'block';
         });
       });
-      var donateClose = document.getElementById('donate-close');
-      if (donateClose) {
-        donateClose.addEventListener('click', function() {
-          var popup = document.getElementById('donate-popup');
-          if (popup) {
-            popup.style.display = 'none';
-          }
-        });
-      }
-    });
-
-    // Обработчик формы проверки утечек (пример)
-    document.getElementById('leakCheckForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      var query = document.getElementById('queryInput').value;
-      var resultDiv = document.getElementById('result');
-      resultDiv.innerHTML = '<p class="loading">Проверяем данные...</p>';
+      document.getElementById('donate-close').addEventListener('click', function() {
+        document.getElementById('donate-popup').style.display = 'none';
+      });
       
-      try {
-        var response = await fetch('https://safe-pass-api.onrender.com/check?query=' + encodeURIComponent(query));
-        if (!response.ok) {
-          throw new Error('Ошибка сервера: ' + response.status);
+      document.getElementById('leakCheckForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        var query = document.getElementById('queryInput').value;
+        var resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = '<p class="loading">Проверяем данные...</p>';
+        try {
+          var response = await fetch('https://safe-pass-api.onrender.com/check?query=' + encodeURIComponent(query));
+          if (!response.ok) throw new Error('Ошибка сервера');
+          var data = await response.json();
+          var html = '';
+          // Здесь обработка полученных данных
+          resultDiv.innerHTML = html;
+        } catch (err) {
+          resultDiv.innerHTML = '<p class="error">Ошибка соединения.</p>';
         }
-        var data = await response.json();
-        var html = '';
-        
-        if (data.local) {
-          if (data.local.found === 0) {
-            html += '<p class="success">❌ В локальных базах ничего не найдено.</p>';
-          } else {
-            html += '<p class="warning">⚠️ Найдено в локальных базах: ' + data.local.found + ' утечек:</p><ul>';
-            data.local.results.forEach(function(leak) {
-              var source = leak.source || leak.provider || leak.sourceName || leak.name || 'N/A';
-              html += '<li>🔍 Источник: <strong>' + source + '</strong><br>📅 Дата: ' + (leak.date || 'N/A') + '</li>';
-            });
-            html += '</ul>';
-          }
-        }
-        
-        if (data.leakCheck) {
-          html += '<p class="warning">⚠️ Найдено в LeakCheck: ' + data.leakCheck.found + ' утечек:</p><ul>';
-          data.leakCheck.results.forEach(function(leak) {
-            var source = leak.source || leak.provider || leak.sourceName || leak.name || 'N/A';
-            html += '<li>🔍 Источник: <strong>' + source + '</strong><br>📅 Дата: ' + (leak.date || 'N/A') + '</li>';
-          });
-          html += '</ul>';
-        }
-        
-        if (!data.local && !data.leakCheck) {
-          if (data.error) {
-            html = '<p class="error">❌ ' + data.error + '</p>';
-          } else if (data.found === 0) {
-            html = '<p class="success">✅ Утечек не найдено!</p>';
-          } else {
-            html = '<p class="warning">⚠️ Найдено ' + data.found + ' утечек:</p><ul>';
-            data.results.forEach(function(leak) {
-              var source = leak.source || leak.provider || leak.sourceName || leak.name || 'N/A';
-              html += '<li>🔍 Источник: <strong>' + source + '</strong><br>📅 Дата: ' + (leak.date || 'N/A') + '</li>';
-            });
-            html += '</ul>';
-          }
-        }
-        
-        if (data.passwordRare) {
-          html += '<p class="success">✅ Этот пароль встречается редко.</p>';
-        }
-        
-        resultDiv.innerHTML = html;
-      } catch (err) {
-        console.error('Ошибка при получении данных:', err);
-        resultDiv.innerHTML = '<p class="error">❌ Ошибка соединения. Попробуйте позже.</p>';
-      }
+      });
     });
 
-    // Копирование номера карты
     function copyCardNumber() {
       var cardText = document.getElementById("card-number").innerText;
       navigator.clipboard.writeText(cardText).then(function() {
