@@ -190,10 +190,20 @@ async function loadArticle(articleKey, modalId) {
     }
 }
 
-// загрузка статьи при клике
+// Загрузка статьи "Как защитить аккаунт от взлома?"
 document.querySelector('[data-modal="modal1"]').addEventListener('click', function() {
     loadArticle('article1', 'modal1');
 });
+
+// Загрузка статьи "Каким должен быть надежный пароль?"
+document.querySelector('[data-modal="modal2"]').addEventListener('click', function() {
+    loadArticle('article2', 'modal2');
+});
+// Загрузка статьи "Что делать, если пароль скомпрометирован?"
+document.querySelector('[data-modal="modal3"]').addEventListener('click', function() {
+    loadArticle('article3', 'modal3');
+});
+    
 </script>
 
 </body>
