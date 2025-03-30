@@ -319,5 +319,15 @@ footer {
 .close-modal:hover {
   color: #ff4c4c;
 }
+.modal {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal.show {
+  opacity: 1;
+  pointer-events: auto;
+}
 
 
