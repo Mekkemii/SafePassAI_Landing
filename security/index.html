@@ -180,7 +180,8 @@ async function loadArticle(articleKey, modalId) {
         const article = articles[articleKey];
         if (article) {
             document.querySelector(`#${modalId} .modal-content h2`).innerHTML = article.title;
-            document.querySelector(`#${modalId} .modal-content p`).innerHTML = article.content;
+         document.querySelector(`#${modalId} .modal-content .article-content`).innerHTML = article.content;
+
         } else {
             console.error('Article not found:', articleKey);
         }
