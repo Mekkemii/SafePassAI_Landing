@@ -116,3 +116,39 @@ def search_in_local_files(query):
 
 if __name__ == "__main__":
     app.run(debug=True)
+@app.route("/generate-passwords", methods=["POST"])
+def generate_passwords():
+    data = request.get_json()
+    name = data.get("name", "").strip().lower()
+    city = data.get("city", "").strip().lower()
+    year = data.get("year", "").strip()
+
+    if not name or not city or not year:
+        return jsonify({"error": "Все поля обязательны."}), 400
+
+    variants = []
+
+    # Простейшие шаблоны
+    base_parts = [name, city, year]
+    for part1 in base_parts:
+        for part2 in base_parts:
+            if part1 != part2:
+                variants.append(part1 + part2)
+                variants.append(part1.capitalize() + part2)
+                variants.append(part1 + part2 + "123")
+                variants.append(part1 + part2 + "!")
+    
+    # Комбинируем с шаблонами
+    variants += [
+        name + year,
+        city + year,
+        name + "123",
+        name + "!",
+        name + "_" + city,
+        name + "@" + year,
+    ]
+
+    # Уникализируем и обрезаем
+    passwords = list(set(variants))[:10]
+
+    return jsonify({"passwords": passwords})
