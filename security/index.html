@@ -1,177 +1,31 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Блок безопасности — SafePassAI</title>
-  <meta name="description" content="Полезные статьи и советы по безопасности данных и защите личной информации от SafePassAI." />
-  <link href="/style.css" rel="stylesheet" />
-  <style>
-    .articles {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .card {
-      padding: 20px;
-      background-color: var(--card-background);
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow);
-      margin-bottom: 10px;
-    }
-    .card h2 {
-      margin-top: 0;
-    }
-    .card a.read-more {
-      color: #00bfae;
-      text-decoration: none;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .card a.read-more:hover {
-      text-decoration: underline;
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.7);
-      justify-content: center;
-      align-items: center;
-    }
-    .modal-content {
-      background-color: var(--card-background);
-      padding: 20px;
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow);
-      max-width: 600px;
-      width: 90%;
-      position: relative;
-    }
-    .close-modal {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 25px;
-      cursor: pointer;
-      color: #fff;
-    }
-    footer {
-      padding: 10px 0;
-      text-align: center;
-      background-color: #222;
-      color: #fff;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
-    main {
-      padding-bottom: 80px;
-    }
-  </style>
-</head>
-<body>
-
-<header>
-  <div class="navbar container">
-    <button class="hamburger" id="hamburgerBtn">☰</button>
-    <div class="nav-left" id="navMenu">
-      <a href="https://t.me/SafePassAIBot" target="_blank">TG-бот</a>
-      <a href="/">Проверка</a>
-      <a href="/generate">Генерация пароля</a>
-      <a href="/security" class="active">Блог безопасности</a>
-      <a href="/about">О проекте</a>
-      <button id="donate-btn" class="donate-button">Поддержать проект</button>
-    </div>
-    <div class="nav-right">
-      <h1>SafePassAI</h1>
-    </div>
-  </div>
-</header>
-
-<main class="container">
-  <h1>Блок безопасности</h1>
-  <section class="articles">
-    <article class="card">
-      <h2>Как защитить аккаунт от взлома?</h2>
-      <p>Узнайте, как правильно защищать аккаунты и избегать распространенных ошибок.</p>
-      <a class="read-more" data-modal="modal1">Читать далее →</a>
-    </article>
-
-    <article class="card">
-      <h2>Каким должен быть надежный пароль?</h2>
-      <p>Советы и рекомендации по созданию безопасных паролей, которые невозможно взломать.</p>
-      <a class="read-more" data-modal="modal2">Читать далее →</a>
-    </article>
-
-    <article class="card">
-      <h2>Что делать, если пароль скомпрометирован?</h2>
-      <p>Пошаговая инструкция, как действовать при обнаружении утечки пароля.</p>
-      <a class="read-more" data-modal="modal3">Читать далее →</a>
-    </article>
-  </section>
-</main>
-
-<footer>
-  <p>© 2025 SafePassAI</p>
-</footer>
-
-<!-- Модалки статей -->
-<div class="modal" id="modal1">
-  <div class="modal-content">
-    <span class="close-modal">&times;</span>
-    <h2></h2>
-    <div class="article-content"></div>
-  </div>
-</div>
-
-<div class="modal" id="modal2">
-  <div class="modal-content">
-    <span class="close-modal">&times;</span>
-    <h2></h2>
-    <div class="article-content"></div>
-  </div>
-</div>
-
-<div class="modal" id="modal3">
-  <div class="modal-content">
-    <span class="close-modal">&times;</span>
-    <h2></h2>
-    <div class="article-content"></div>
-  </div>
-</div>
-
-<!-- Модалка "Поддержать проект" -->
-<div id="donate-popup" style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
- background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1001; text-align: center;">
-  <h3>Спасибо за вашу поддержку!</h3>
-  <p>Поддержите проект:</p>
-  <a href="https://pay.cloudtips.ru/p/50385217" target="_blank"
-     style="display: inline-block; padding: 10px 20px; background-color: #4CAF50;
-     color: white; font-size: 18px; text-decoration: none; border-radius: 6px; margin: 10px 0;">
-    Перейти к оплате
-  </a>
-  <p>Любая сумма важна</p>
-  <button id="donate-close" style="margin-top: 10px;">Закрыть</button>
-</div>
-
-<!-- Скрипты -->
+<!-- СКРИПТЫ -->
 <script>
-  // Модалки статей
   document.querySelectorAll('.read-more').forEach(function(elem) {
-    elem.addEventListener('click', function() {
-      var modalId = this.getAttribute('data-modal');
-      document.getElementById(modalId).style.display = 'flex';
+    elem.addEventListener('click', async function () {
+      const modalId = this.getAttribute('data-modal');
+      const articleKey = 'article' + modalId.replace('modal', '');
+
+      try {
+        const response = await fetch('https://safe-pass-ai-landing.vercel.app/articles.json');
+        const articles = await response.json();
+        const article = articles[articleKey];
+
+        if (article) {
+          document.querySelector(`#${modalId} .modal-content h2`).innerHTML = article.title;
+          document.querySelector(`#${modalId} .modal-content .article-content`).innerHTML = article.content;
+          document.getElementById(modalId).style.display = 'flex';
+        } else {
+          console.error('Статья не найдена:', articleKey);
+        }
+      } catch (error) {
+        console.error('Ошибка при загрузке статьи:', error);
+      }
     });
   });
 
+  // Закрытие модалок
   document.querySelectorAll('.close-modal').forEach(function(elem) {
-    elem.addEventListener('click', function() {
+    elem.addEventListener('click', function () {
       this.closest('.modal').style.display = 'none';
     });
   });
@@ -182,55 +36,25 @@
     }
   });
 
-  // Загрузка статей
-  async function loadArticle(articleKey, modalId) {
-    try {
-    const response = await fetch('https://safe-pass-ai-landing.vercel.app/articles.json');
-      const articles = await response.json();
-      const article = articles[articleKey];
-      if (article) {
-        document.querySelector(`#${modalId} .modal-content h2`).innerHTML = article.title;
-        document.querySelector(`#${modalId} .modal-content .article-content`).innerHTML = article.content;
-      } else {
-        console.error('Article not found:', articleKey);
-      }
-    } catch (error) {
-      console.error('Error loading article:', error);
-    }
-  }
-
-  document.querySelector('[data-modal="modal1"]').addEventListener('click', function() {
-    loadArticle('article1', 'modal1');
-  });
-  document.querySelector('[data-modal="modal2"]').addEventListener('click', function() {
-    loadArticle('article2', 'modal2');
-  });
-  document.querySelector('[data-modal="modal3"]').addEventListener('click', function() {
-    loadArticle('article3', 'modal3');
-  });
-
   // Модалка доната
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     const donateBtn = document.getElementById('donate-btn');
     const donatePopup = document.getElementById('donate-popup');
     const donateClose = document.getElementById('donate-close');
 
-    donateBtn.addEventListener('click', function(e) {
+    donateBtn.addEventListener('click', function (e) {
       e.preventDefault();
       donatePopup.style.display = 'block';
     });
 
-    donateClose.addEventListener('click', function() {
+    donateClose.addEventListener('click', function () {
       donatePopup.style.display = 'none';
     });
 
-    window.addEventListener('click', function(e) {
+    window.addEventListener('click', function (e) {
       if (e.target === donatePopup) {
         donatePopup.style.display = 'none';
       }
     });
   });
 </script>
-
-</body>
-</html>
