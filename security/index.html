@@ -168,7 +168,7 @@
       const articleKey = 'article' + modalId.replace('modal', '');
 
       try {
-        const response = await fetch('https://safe-pass-ai-landing.vercel.app/articles.json');
+      const response = await fetch('/articles.json');
         const articles = await response.json();
         const article = articles[articleKey];
 
