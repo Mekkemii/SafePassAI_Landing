@@ -1,50 +1,31 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SafePassAI — Проверка утечек</title>
   <meta name="description" content="SafePassAI — проверьте, не утекли ли ваши данные в интернет.">
- <meta name="keywords" content="генератор паролей, проверить пароль, безопасность аккаунта, утечки паролей, проверка на утечки">
+  <meta name="keywords" content="генератор паролей, проверить пароль, безопасность аккаунта, утечки паролей, проверка на утечки">
   <meta property="og:title" content="SafePassAI – проверка паролей на утечки и генерация паролей">
-<meta property="og:description" content="Проверьте свои пароли на безопасность и создавайте надежные пароли с помощью SafePassAI.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://safe-pass-ai-landing.vercel.app/">
-<meta property="og:image" content="https://safe-pass-ai-landing.vercel.app/assets/preview-image.png">
+  <meta property="og:description" content="Проверьте свои пароли на безопасность и создавайте надежные пароли с помощью SafePassAI.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://safe-pass-ai-landing.vercel.app/">
+  <meta property="og:image" content="https://safe-pass-ai-landing.vercel.app/assets/preview-image.png">
 
-  <link rel="stylesheet" href="style.css">
-  
-  <!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
-   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-   m[i].l=1*new Date();
-   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-   ym(100677684, "init", {
-        clickmap:true,
-        trackLinks:true,
-        accurateTrackBounce:true,
-        webvisor:true
-   });
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/100677684" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-  
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
     <div class="navbar container">
       <button class="hamburger" id="hamburgerBtn">☰</button>
-<div class="nav-left" id="navMenu">
-  <a href="https://t.me/SafePassAIBot" target="_blank">TG-бот</a>
-  <a href="/" class="active">Проверка</a>
-  <a href="/generate">Генерация пароля</a>
-  <a href="/security">Блог безопасности</a>
-  <a href="/about">О проекте</a>
-  <button id="donate-btn" class="donate-button">Поддержать проект</button>
-</div>
+      <div class="nav-left" id="navMenu">
+        <a href="https://t.me/SafePassAIBot" target="_blank">TG-бот</a>
+        <a href="/" class="active">Проверка</a>
+        <a href="/generate">Генерация пароля</a>
+        <a href="/security">Блог безопасности</a>
+        <a href="/about">О проекте</a>
+        <button id="donate-btn" class="donate-button">Поддержать проект</button>
+      </div>
       <div class="nav-right">
         <h1>SafePassAI</h1>
       </div>
@@ -69,7 +50,7 @@
 
     <section class="card check-form">
       <h2>Проверка утечек</h2>
-      <p>Введите данные для проверки на утечки:</p>
+      <p>Введите email или логин:</p>
       <form id="leakCheckForm">
         <input type="text" id="queryInput" placeholder="Введите данные..." required>
         <button type="submit">Проверить</button>
@@ -77,40 +58,50 @@
       <div id="result"></div>
     </section>
 
+    <section class="card check-form">
+      <h2>Проверка пароля на популярность</h2>
+      <p>Введите пароль (данные не сохраняются):</p>
+      <form id="passwordCheckForm">
+        <input type="password" id="passwordInput" placeholder="Введите пароль..." required>
+        <button type="submit">Проверить</button>
+      </form>
+      <div id="passwordResult"></div>
+    </section>
+
     <div style="text-align:center">
       <button id="donate-btn" class="donate-button">❤️ Поддержать проект</button>
     </div>
 
-<div id="donate-popup">
-  <h3>Спасибо за вашу поддержку!</h3>
-  <p>Поддержите проект:</p>
-  <a href="https://pay.cloudtips.ru/p/50385217" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; font-size: 18px; text-decoration: none; border-radius: 6px; margin: 10px 0;">
-    Перейти к оплате
-  </a>
-  <p>Любая сумма важна</p>
-  <button id="donate-close">Закрыть</button>
-</div>
-
+    <div id="donate-popup">
+      <h3>Спасибо за вашу поддержку!</h3>
+      <p>Поддержите проект:</p>
+      <a href="https://pay.cloudtips.ru/p/50385217" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; font-size: 18px; text-decoration: none; border-radius: 6px; margin: 10px 0;">
+        Перейти к оплате
+      </a>
+      <p>Любая сумма важна</p>
+      <button id="donate-close">Закрыть</button>
+    </div>
   </main>
 
-<footer>
+  <footer>
     <p>© 2025 SafePassAI</p>
-</footer>
-
+  </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       var donateBtns = document.querySelectorAll('#donate-btn');
-      donateBtns.forEach(function(btn) {
-        btn.addEventListener('click', function(e) {
+      donateBtns.forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
           e.preventDefault();
           document.getElementById('donate-popup').style.display = 'block';
         });
       });
-      document.getElementById('donate-close').addEventListener('click', function() {
+      document.getElementById('donate-close').addEventListener('click', function () {
         document.getElementById('donate-popup').style.display = 'none';
       });
-      document.getElementById('leakCheckForm').addEventListener('submit', async function(e) {
+
+      // 🛡️ Проверка email/login
+      document.getElementById('leakCheckForm').addEventListener('submit', async function (e) {
         e.preventDefault();
         var query = document.getElementById('queryInput').value;
         var resultDiv = document.getElementById('result');
@@ -119,14 +110,17 @@
           var response = await fetch('https://safe-pass-api.onrender.com/check?query=' + encodeURIComponent(query));
           if (!response.ok) throw new Error('Ошибка сервера');
           var data = await response.json();
-          console.log(data);
           var html = '';
           if (data && data.found) {
             html = '<p class="success">Найдены утечки: ' + data.found + '</p>';
             if (data.results && data.results.length > 0) {
               html += '<ul>';
               data.results.forEach(item => {
-                html += '<li>' + item.name + ' — ' + item.date + '</li>';
+                if (item.name) {
+                  html += '<li>' + item.name + ' — ' + (item.date || 'без даты') + '</li>';
+                } else if (item.source) {
+                  html += '<li>Источник: ' + item.source + '</li>';
+                }
               });
               html += '</ul>';
             }
@@ -138,16 +132,41 @@
           resultDiv.innerHTML = '<p class="error">Ошибка соединения.</p>';
         }
       });
+
+      // 🔐 Проверка пароля на популярность
+      document.getElementById('passwordCheckForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var password = document.getElementById('passwordInput').value;
+        var passwordResult = document.getElementById('passwordResult');
+        passwordResult.innerHTML = '<p class="loading">Анализ пароля...</p>';
+        try {
+          var response = await fetch('https://safe-pass-api.onrender.com/check-password', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ password: password }),
+          });
+          if (!response.ok) throw new Error('Ошибка сервера');
+          var data = await response.json();
+          passwordResult.innerHTML = data.is_common
+            ? '<p class="error">' + data.message + '</p>'
+            : '<p class="success">' + data.message + '</p>';
+        } catch (err) {
+          passwordResult.innerHTML = '<p class="error">Ошибка соединения.</p>';
+        }
+      });
+
       var hamburgerBtn = document.getElementById('hamburgerBtn');
       var navMenu = document.getElementById('navMenu');
-      hamburgerBtn.addEventListener('click', function() {
+      hamburgerBtn.addEventListener('click', function () {
         navMenu.classList.toggle('open');
       });
     });
 
     function copyCardNumber() {
       var cardText = document.getElementById("card-number").innerText;
-      navigator.clipboard.writeText(cardText).then(function() {
+      navigator.clipboard.writeText(cardText).then(function () {
         alert("Номер карты скопирован!");
       });
     }
