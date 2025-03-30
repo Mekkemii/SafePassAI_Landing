@@ -251,4 +251,21 @@ footer {
   pointer-events: none; /* нельзя кликать */
   opacity: 0.6;         /* визуальное выделение */
 }
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+main.container {
+  flex: 1;
+}
+
+footer {
+  padding: 10px 0;
+  text-align: center;
+  background-color: #222;
+  color: #fff;
+}
 
