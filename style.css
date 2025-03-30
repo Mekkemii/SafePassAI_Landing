@@ -277,5 +277,21 @@ footer {
   background-color: #222;
   color: #fff;
 }
+.modal-content {
+    color: #e0e0e0;
+}
 
+.modal-content p, .modal-content ul {
+    margin: 10px 0;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.modal-content ul {
+    padding-left: 20px;
+}
+
+.modal-content li {
+    margin-bottom: 8px;
+}
 
