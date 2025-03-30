@@ -164,23 +164,31 @@
 <!-- Скрипты -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    // Кнопки "Читать далее"
-    document.querySelectorAll('.read-more').forEach(function(elem) {
-      elem.addEventListener('click', async function () {
+    const modals = document.querySelectorAll('.modal');
+    const closeButtons = document.querySelectorAll('.close-modal');
+    const readMoreButtons = document.querySelectorAll('.read-more');
+
+    readMoreButtons.forEach(button => {
+      button.addEventListener('click', async function () {
         const modalId = this.getAttribute('data-modal');
         const articleKey = 'article' + modalId.replace('modal', '');
+        const modal = document.getElementById(modalId);
 
         try {
           const response = await fetch('/articles.json');
           const articles = await response.json();
           const article = articles[articleKey];
 
-          if (article) {
-            document.querySelector(`#${modalId} .modal-content h2`).innerHTML = article.title;
-            document.querySelector(`#${modalId} .modal-content .article-content`).innerHTML = article.content;
-            document.getElementById(modalId).style.display = 'flex';
+          if (article && modal) {
+            const titleElem = modal.querySelector('.modal-content h2');
+            const contentElem = modal.querySelector('.modal-content .article-content');
+            if (titleElem && contentElem) {
+              titleElem.innerHTML = article.title;
+              contentElem.innerHTML = article.content;
+              modal.style.display = 'flex';
+            }
           } else {
-            console.error('Статья не найдена:', articleKey);
+            console.error('Статья или модалка не найдена:', articleKey);
           }
         } catch (error) {
           console.error('Ошибка при загрузке статьи:', error);
@@ -188,16 +196,15 @@
       });
     });
 
-    // Закрытие модалок
-    document.querySelectorAll('.close-modal').forEach(function(elem) {
-      elem.addEventListener('click', function () {
+    closeButtons.forEach(button => {
+      button.addEventListener('click', function () {
         this.closest('.modal').style.display = 'none';
       });
     });
 
-    window.addEventListener('click', function(event) {
-      if (event.target.classList.contains('modal')) {
-        event.target.style.display = 'none';
+    window.addEventListener('click', function (e) {
+      if (e.target.classList.contains('modal')) {
+        e.target.style.display = 'none';
       }
     });
 
@@ -206,22 +213,25 @@
     const donatePopup = document.getElementById('donate-popup');
     const donateClose = document.getElementById('donate-close');
 
-    donateBtn.addEventListener('click', function (e) {
-      e.preventDefault();
-      donatePopup.style.display = 'block';
-    });
+    if (donateBtn && donatePopup && donateClose) {
+      donateBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        donatePopup.style.display = 'block';
+      });
 
-    donateClose.addEventListener('click', function () {
-      donatePopup.style.display = 'none';
-    });
-
-    window.addEventListener('click', function (e) {
-      if (e.target === donatePopup) {
+      donateClose.addEventListener('click', function () {
         donatePopup.style.display = 'none';
-      }
-    });
+      });
+
+      window.addEventListener('click', function (e) {
+        if (e.target === donatePopup) {
+          donatePopup.style.display = 'none';
+        }
+      });
+    }
   });
 </script>
+
 
 
 </body>
