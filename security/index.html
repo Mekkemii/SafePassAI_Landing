@@ -7,7 +7,42 @@
     <meta name="description" content="Полезные статьи и советы по безопасности данных и защите личной информации от SafePassAI."/>
 
     <link href="/style.css" rel="stylesheet">
-
+    <style>
+        .articles {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .card {
+            padding: 20px;
+            background-color: var(--card-background);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 10px;
+        }
+        .card h2 {
+            margin-top: 0;
+        }
+        .card a.read-more {
+            color: #00bfae;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .card a.read-more:hover {
+            text-decoration: underline;
+        }
+        footer {
+            padding: 10px 0;
+            width: 100%;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            background-color: #222;
+        }
+        main {
+            padding-bottom: 60px;
+        }
+    </style>
 </head>
 <body>
 
@@ -29,26 +64,26 @@
     </div>
 </header>
 
-<main>
+<main class="container">
     <h1>Блок безопасности</h1>
     <section class="articles">
 
         <article class="card">
             <h2>Как защитить аккаунт от взлома?</h2>
             <p>Узнайте, как правильно защищать аккаунты и избегать распространенных ошибок.</p>
-            <a href="#">Читать далее</a>
+            <a href="#" class="read-more">Читать далее →</a>
         </article>
 
         <article class="card">
             <h2>Каким должен быть надежный пароль?</h2>
             <p>Советы и рекомендации по созданию безопасных паролей, которые невозможно взломать.</p>
-            <a href="#">Читать далее</a>
+            <a href="#" class="read-more">Читать далее →</a>
         </article>
 
         <article class="card">
             <h2>Что делать, если пароль скомпрометирован?</h2>
             <p>Пошаговая инструкция, как действовать при обнаружении утечки пароля.</p>
-            <a href="#">Читать далее</a>
+            <a href="#" class="read-more">Читать далее →</a>
         </article>
 
     </section>
