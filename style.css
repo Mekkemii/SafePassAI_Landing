@@ -247,3 +247,8 @@ footer {
     text-align: center;
   }
 }
+.nav-left a.active {
+  pointer-events: none; /* нельзя кликать */
+  opacity: 0.6;         /* визуальное выделение */
+}
+
