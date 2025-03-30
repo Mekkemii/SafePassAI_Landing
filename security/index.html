@@ -170,6 +170,28 @@
         }
     });
 </script>
+<script>
+async function loadArticle(articleKey, modalId) {
+    try {
+        const response = await fetch('/articles.json');
+        const articles = await response.json();
+        const article = articles[articleKey];
+        if (article) {
+            document.querySelector(`#${modalId} .modal-content h2`).innerHTML = article.title;
+            document.querySelector(`#${modalId} .modal-content p`).innerHTML = article.content;
+        } else {
+            console.error('Article not found:', articleKey);
+        }
+    } catch (error) {
+        console.error('Error loading article:', error);
+    }
+}
+
+// загрузка статьи при клике
+document.querySelector('[data-modal="modal1"]').addEventListener('click', function() {
+    loadArticle('article1', 'modal1');
+});
+</script>
 
 </body>
 </html>
