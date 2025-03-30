@@ -254,18 +254,28 @@ footer {
 html, body {
   height: 100%;
   margin: 0;
+}
+
+body {
   display: flex;
   flex-direction: column;
 }
 
+header {
+  flex-shrink: 0;
+}
+
 main.container {
-  flex: 1;
+  flex-grow: 1;
+  width: 100%;
 }
 
 footer {
+  flex-shrink: 0;
   padding: 10px 0;
   text-align: center;
   background-color: #222;
   color: #fff;
 }
+
 
