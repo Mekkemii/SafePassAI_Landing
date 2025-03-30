@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>О проекте — SafePassAI</title>
+  <meta name="description" content="SafePassAI — pet-проект для повышения цифровой безопасности. Узнайте о функциональности и технологиях проекта.">
+  <meta name="keywords" content="SafePassAI, о проекте, цифровая безопасность, Telegram-бот">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(100677684, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/100677684" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+  
+</head>
+<body>
+  <header>
+    <div class="navbar container">
+      <button class="hamburger" id="hamburgerBtn">☰</button>
+      <div class="nav-left" id="navMenu">
+        <a href="https://t.me/SafePassAIBot" target="_blank">TG-бот</a>
+        <a href="index.html">Проверка</a>
+        <a href="generate.html">Генерация пароля</a>
+        <a href="security.html">Блог безопасности</a>
+        <a href="about.html">О проекте</a>
+        <button id="donate-btn" class="donate-button">Поддержать проект</button>
+      </div>
+      <div class="nav-right">
+        <h1>SafePassAI</h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card about-content">
+      <h2>О проекте</h2>
+      <p><strong>SafePassAI</strong> — это pet-проект, направленный на повышение цифровой безопасности пользователей.</p>
+      <h3>Функциональность:</h3>
+      <ul>
+        <li>Проверка логинов, email, имен и паролей в публичных утечках</li>
+        <li>Интеграция с API различных сервисов для получения информации об утечках</li>
+        <li>Агрегация и обработка результатов проверки</li>
+        <li>Генерация надёжных паролей при выявлении слабых или скомпрометированных</li>
+        <li>Асинхронное взаимодействие через Telegram-бота</li>
+      </ul>
+      <h3>Технологии:</h3>
+      <ul>
+        <li>Python</li>
+        <li>Работа с большими базами данных</li>
+        <li>Telegram Bot API</li>
+        <li>Интеграция с внешними API</li>
+        <li>Render и Vercel для хостинга</li>
+      </ul>
+      <h3>Цель:</h3>
+      <p>Проект помогает улучшить навыки разработки, работы с API и повышает осведомлённость о цифровой безопасности.</p>
+    </section>
+
+    <div style="text-align:center">
+      <button id="donate-btn" class="donate-button">❤️ Поддержать проект</button>
+    </div>
+
+    <div id="donate-popup">
+      <h3>Спасибо за вашу поддержку!</h3>
+      <p>Поддержите проект переводом на карту:</p>
+      <p style="font-size: 20px;"><strong id="card-number">2200 7007 3707 5779</strong></p>
+      <button onclick="copyCardNumber()">Скопировать номер карты</button>
+      <p>Любая сумма важна</p>
+      <button id="donate-close">Закрыть</button>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 SafePassAI</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var donateBtns = document.querySelectorAll('#donate-btn');
+      donateBtns.forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.getElementById('donate-popup').style.display = 'block';
+        });
+      });
+      document.getElementById('donate-close').addEventListener('click', function() {
+        document.getElementById('donate-popup').style.display = 'none';
+      });
+      var hamburgerBtn = document.getElementById('hamburgerBtn');
+      var navMenu = document.getElementById('navMenu');
+      hamburgerBtn.addEventListener('click', function() {
+        navMenu.classList.toggle('open');
+      });
+    });
+    function copyCardNumber() {
+      var cardText = document.getElementById("card-number").innerText;
+      navigator.clipboard.writeText(cardText).then(function() {
+        alert("Номер карты скопирован!");
+      });
+    }
+  </script>
+</body>
+</html>
