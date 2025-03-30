@@ -13,19 +13,24 @@
 * {
   box-sizing: border-box;
 }
- 
+
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
   line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  flex-grow: 1;
+  width: 100%;
 }
 
 header {
@@ -36,6 +41,7 @@ header {
   top: 0;
   z-index: 100;
   box-shadow: var(--shadow);
+  flex-shrink: 0;
 }
 
 .navbar {
@@ -43,6 +49,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
+  flex-wrap: wrap;
 }
 
 .nav-left,
@@ -70,6 +77,11 @@ header {
   border-radius: var(--border-radius);
 }
 
+.nav-left a.active {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
 .nav-right h1 {
   margin: 0;
   font-size: 2em;
@@ -85,11 +97,36 @@ header {
   margin-right: 10px;
 }
 
-.headline {
-  text-align: center;
-  font-size: 1.8em;
-  font-weight: 500;
-  margin: 20px 0;
+/* Табы */
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 30px 0;
+}
+
+.tab-button {
+  background: #eee;
+  color: #111;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.tab-button.active {
+  background: #4CAF50;
+  color: white;
+}
+
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
 }
 
 .card {
@@ -118,6 +155,7 @@ form {
 }
 
 input[type="text"],
+input[type="password"],
 select {
   padding: 12px;
   border: none;
@@ -142,7 +180,12 @@ button:hover {
   background: #005bb5;
 }
 
-#result, #passwordResult {
+.donate-button {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+#result, #passwordResult, #wordlistResult {
   margin-top: 20px;
   padding: 15px;
   border-radius: var(--border-radius);
@@ -180,46 +223,42 @@ footer {
   text-align: center;
   padding: 20px 0;
   color: #fff;
-  margin-top: 20px;
+  flex-shrink: 0;
 }
 
+/* 🌙 Светлая тема */
 .light-mode body {
   background: #f5f5f5;
   color: #333;
 }
-
 .light-mode header {
   background: #f5f5f5;
   color: #333;
 }
-
 .light-mode .navbar a,
 .light-mode .navbar button {
   color: #333;
 }
-
 .light-mode .card {
   background: #fff;
   color: #333;
 }
-
 .light-mode input[type="text"],
 .light-mode select {
   background: #fff;
   color: #333;
 }
-
 .light-mode #result,
 .light-mode #passwordResult {
   background: #fff;
   color: #333;
 }
-
 .light-mode footer {
   background: #f5f5f5;
   color: #333;
 }
 
+/* 📱 Мобильная адаптация */
 @media (max-width: 768px) {
   .hamburger {
     display: block;
@@ -229,6 +268,7 @@ footer {
     flex-direction: column;
     width: 100%;
     text-align: center;
+    margin-top: 10px;
   }
   .nav-left.open {
     display: flex;
@@ -238,94 +278,18 @@ footer {
     margin: 10px 0;
     font-size: 1em;
   }
-  .navbar {
-    flex-wrap: wrap;
-  }
   .nav-right {
     margin-top: 10px;
     width: 100%;
     text-align: center;
   }
-}
-.nav-left a.active {
-  pointer-events: none; /* нельзя кликать */
-  opacity: 0.6;         /* визуальное выделение */
-}
-html, body {
-  height: 100%;
-  margin: 0;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-}
-
-header {
-  flex-shrink: 0;
-}
-
-main.container {
-  flex-grow: 1;
-  width: 100%;
-}
-
-footer {
-  flex-shrink: 0;
-  padding: 10px 0;
-  text-align: center;
-  background-color: #222;
-  color: #fff;
-}
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.7);
-  overflow-y: auto;
-  padding: 40px 20px; /* отступ сверху/снизу и сбоку на мобилках */
-}
-
-.modal-content {
-  background-color: var(--card-background);
-  color: var(--text-color);
-  margin: auto;
-  padding: 20px;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-  max-width: 700px;
-  width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-}
-
-.close-modal {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 24px;
-  color: #fff;
-  cursor: pointer;
-  background: none;
-  border: none;
-  z-index: 10;
-}
-
-.close-modal:hover {
-  color: #ff4c4c;
-}
-.modal {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-.modal.show {
-  opacity: 1;
-  pointer-events: auto;
+  .tab-buttons {
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .tab-button {
+    width: 100%;
+    max-width: 300px;
+  }
 }
