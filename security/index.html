@@ -163,42 +163,45 @@
 
 <!-- Скрипты -->
 <script>
-  document.querySelectorAll('.read-more').forEach(function(elem) {
-    elem.addEventListener('click', async function () {
-      const modalId = this.getAttribute('data-modal');
-      const articleKey = 'article' + modalId.replace('modal', '');
+  document.addEventListener('DOMContentLoaded', function () {
+    // Кнопки "Читать далее"
+    document.querySelectorAll('.read-more').forEach(function(elem) {
+      elem.addEventListener('click', async function () {
+        const modalId = this.getAttribute('data-modal');
+        const articleKey = 'article' + modalId.replace('modal', '');
 
-      try {
-      const response = await fetch('/articles.json');
-        const articles = await response.json();
-        const article = articles[articleKey];
+        try {
+          const response = await fetch('/articles.json');
+          const articles = await response.json();
+          const article = articles[articleKey];
 
-        if (article) {
-          document.querySelector(`#${modalId} .modal-content h2`).innerHTML = article.title;
-          document.querySelector(`#${modalId} .modal-content .article-content`).innerHTML = article.content;
-          document.getElementById(modalId).style.display = 'flex';
-        } else {
-          console.error('Статья не найдена:', articleKey);
+          if (article) {
+            document.querySelector(`#${modalId} .modal-content h2`).innerHTML = article.title;
+            document.querySelector(`#${modalId} .modal-content .article-content`).innerHTML = article.content;
+            document.getElementById(modalId).style.display = 'flex';
+          } else {
+            console.error('Статья не найдена:', articleKey);
+          }
+        } catch (error) {
+          console.error('Ошибка при загрузке статьи:', error);
         }
-      } catch (error) {
-        console.error('Ошибка при загрузке статьи:', error);
+      });
+    });
+
+    // Закрытие модалок
+    document.querySelectorAll('.close-modal').forEach(function(elem) {
+      elem.addEventListener('click', function () {
+        this.closest('.modal').style.display = 'none';
+      });
+    });
+
+    window.addEventListener('click', function(event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
       }
     });
-  });
 
-  document.querySelectorAll('.close-modal').forEach(function(elem) {
-    elem.addEventListener('click', function () {
-      this.closest('.modal').style.display = 'none';
-    });
-  });
-
-  window.addEventListener('click', function(event) {
-    if (event.target.classList.contains('modal')) {
-      event.target.style.display = 'none';
-    }
-  });
-
-  document.addEventListener('DOMContentLoaded', function () {
+    // Модалка доната
     const donateBtn = document.getElementById('donate-btn');
     const donatePopup = document.getElementById('donate-popup');
     const donateClose = document.getElementById('donate-close');
@@ -219,6 +222,7 @@
     });
   });
 </script>
+
 
 </body>
 </html>
