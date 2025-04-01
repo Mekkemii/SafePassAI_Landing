@@ -170,7 +170,7 @@
         html += `<li>Открытые порты: ${data.ports.join(', ')}</li>`;
         html += '</ul>'; resultDiv.innerHTML = html;
       } catch {
-        resultDiv.innerHTML = '<p class="error">Ошибка соединения или IP не найден.</p>';
+        resultDiv.innerHTML = '<p class="success">IP не найден.</p>';
       }
     });
   </script>
