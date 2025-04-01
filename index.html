@@ -78,26 +78,6 @@
       <div id="passwordResult"></div>
     </section>
 
-    <section id="tab-generator" class="tab-content">
-      <h2>Генератор персонального пароля</h2>
-      <p>На основе вашего имени, города и года рождения мы сгенерируем 10 вероятных паролей. Если среди них окажется ваш — рекомендуем немедленно его изменить!</p>
-      <form id="wordlistForm">
-        <input type="text" id="nameInput" placeholder="Имя" required />
-        <input type="text" id="cityInput" placeholder="Город" required />
-        <input type="text" id="yearInput" placeholder="Год рождения" required />
-        <button type="submit">Сгенерировать</button>
-      </form>
-      <div id="wordlistResult"></div>
-    
-<div id="akinator-section" style="margin-top: 40px;">
-  <h3>🧠 Анализ пароля (Акинатор)</h3>
-  <p>Ответьте на вопросы, чтобы мы попробовали угадать ваши пароли.</p>
-  <div id="akinator-questions"></div>
-  <div id="akinator-followups" style="margin-top: 20px;"></div>
-  <button onclick="submitAkinator()">Показать возможные пароли</button>
-  <div id="akinator-results" class="guess-list"></div>
-</div>
-
     <div style="text-align:center">
       <button id="donate-btn" class="donate-button">❤️ Поддержать проект</button>
     </div>
@@ -222,7 +202,7 @@
     let akinatorBool = {}, akinatorText = {}, akinatorFollowups = [];
 
     async function loadAkinatorQuestions() {
-      const res = await fetch("https://safepassai-landing.onrender.com/get-questions");
+      const res = await fetch("http://localhost:8000/get-questions");
       const data = await res.json();
       const container = document.getElementById("akinator-questions");
       container.innerHTML = '';
@@ -239,7 +219,7 @@
     }
 
     async function submitAkinator() {
-      const res = await fetch("https://safepassai-landing.onrender.com/get-followups", {
+      const res = await fetch("http://localhost:8000/get-followups", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(akinatorBool),
@@ -264,7 +244,7 @@
     }
 
     async function guessAkinatorPasswords() {
-      const res = await fetch("https://safepassai-landing.onrender.com/guess-passwords", {
+      const res = await fetch("http://localhost:8000/guess-passwords", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ bools: akinatorBool, texts: akinatorText }),
