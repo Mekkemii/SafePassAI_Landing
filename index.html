@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SafePassAI — Проверка утечек</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SafePassAI — Проверка утечек</title>
+<link href="style.css" rel="stylesheet"/>
+<style>
     .tab-buttons {
       text-align: center;
       margin: 20px 0;
@@ -35,69 +36,50 @@
   </style>
 </head>
 <body>
-  <header>
-  <div class="navbar container">
-    <button class="hamburger" id="hamburgerBtn">☰</button>
-    <div class="nav-left" id="navMenu">
-      <a href="https://t.me/SafePassAIBot" target="_blank">TG-бот</a>
-      <a href="/" class="active">Проверка</a>
-      <a href="/generate">Генерация пароля</a>
-      <a href="/security">Блог безопасности</a>
-      <a href="/about">О проекте</a>
-    </div>
-    <div class="nav-right">
-      <h1>SafePassAI</h1>
-    </div>
-  </div>
+<header>
+<div class="navbar container">
+<button class="hamburger" id="hamburgerBtn">☰</button>
+<div class="nav-left" id="navMenu">
+<a href="https://t.me/SafePassAIBot" target="_blank">TG-бот</a>
+<a class="active" href="/">Проверка</a>
+<a href="/generate">Генерация пароля</a>
+<a href="/security">Блог безопасности</a>
+<a href="/about">О проекте</a>
+</div>
+<div class="nav-right">
+<h1>SafePassAI</h1>
+</div>
+</div>
 </header>
-
-  <main class="container">
-    <div class="tab-buttons">
-      <button class="tab-button active" data-tab="leak">Проверка утечек</button>
-      <button class="tab-button" data-tab="common">Популярные пароли</button>
-      <button class="tab-button" data-tab="generator">Генератор словарей</button>
-    </div>
-
-    <section id="tab-leak" class="tab-content active">
-      <h2>Проверка утечек</h2>
-      <p>Введите email или логин:</p>
-      <form id="leakCheckForm">
-        <input type="text" id="queryInput" placeholder="Введите данные..." required />
-        <button type="submit">Проверить</button>
-      </form>
-      <div id="result"></div>
-    </section>
-
-    <section id="tab-common" class="tab-content">
-      <h2>Проверка пароля на популярность</h2>
-      <p>Введите пароль (не сохраняется):</p>
-      <form id="passwordCheckForm">
-        <input type="password" id="passwordInput" placeholder="Введите пароль..." required />
-        <button type="submit">Проверить</button>
-      </form>
-      <div id="passwordResult"></div>
-    </section>
-
-    <div style="text-align:center">
-      <button id="donate-btn" class="donate-button">❤️ Поддержать проект</button>
-    </div>
-
-    <div id="donate-popup" style="display:none;">
-      <h3>Спасибо за вашу поддержку!</h3>
-      <p>Поддержите проект:</p>
-      <a href="https://pay.cloudtips.ru/p/50385217" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; font-size: 18px; text-decoration: none; border-radius: 6px; margin: 10px 0;">
-        Перейти к оплате
-      </a>
-      <p>Любая сумма важна</p>
-      <button id="donate-close">Закрыть</button>
-    </div>
-  </main>
-
-  <footer>
-    <p>© 2025 SafePassAI</p>
-  </footer>
-
-  <script>
+<main class="container">
+<div class="tab-buttons">
+<button class="tab-button active" data-tab="leak">Проверка утечек</button>
+<button class="tab-button" data-tab="common">Популярные пароли</button>
+<button class="tab-button" data-tab="generator">Генератор словарей</button>
+</div>
+<section class="tab-content active" id="tab-leak">
+<h2>Проверка утечек</h2>
+<p>Введите email или логин:</p>
+<form id="leakCheckForm">
+<input id="queryInput" placeholder="Введите данные..." required="" type="text"/>
+<button type="submit">Проверить</button>
+</form>
+<div id="result"></div>
+</section>
+<section class="tab-content" id="tab-common">
+<h2>Проверка пароля на популярность</h2>
+<p>Введите пароль (не сохраняется):</p>
+<form id="passwordCheckForm">
+<input id="passwordInput" placeholder="Введите пароль..." required="" type="password"/>
+<button type="submit">Проверить</button>
+</form>
+<div id="passwordResult"></div>
+</section>
+</main>
+<footer>
+<p>© 2025 SafePassAI</p>
+</footer>
+<script>
     // 🔁 Переключение табов
     document.querySelectorAll('.tab-button').forEach(button => {
       button.addEventListener('click', () => {
