@@ -1,0 +1,62 @@
+[
+  {
+    "id": "use_birth_date",
+    "question": "Ты используешь дату рождения в паролях?",
+    "type": "bool",
+    "followup": {
+      "id": "birth_date",
+      "question": "Укажи свою дату рождения (например, 1995 или 0312)",
+      "type": "text"
+    }
+  },
+  {
+    "id": "use_pet_name",
+    "question": "Ты используешь имя питомца в пароле?",
+    "type": "bool",
+    "followup": {
+      "id": "pet_name",
+      "question": "Как зовут твоего питомца?",
+      "type": "text"
+    }
+  },
+  {
+    "id": "use_favorite_game",
+    "question": "Ты используешь названия игр в паролях?",
+    "type": "bool",
+    "followup": {
+      "id": "favorite_game",
+      "question": "Назови свою любимую игру",
+      "type": "text"
+    }
+  },
+  {
+    "id": "use_company_name",
+    "question": "Ты используешь название компании или проекта в пароле?",
+    "type": "bool",
+    "followup": {
+      "id": "company_name",
+      "question": "Как называется твоя компания или проект?",
+      "type": "text"
+    }
+  },
+  {
+    "id": "use_city",
+    "question": "Ты используешь в пароле название города?",
+    "type": "bool",
+    "followup": {
+      "id": "city_name",
+      "question": "Какой город ты бы использовал?",
+      "type": "text"
+    }
+  },
+  {
+    "id": "use_nickname",
+    "question": "Ты вставляешь в пароль свой ник/псевдоним?",
+    "type": "bool",
+    "followup": {
+      "id": "nickname",
+      "question": "Какой у тебя ник или псевдоним?",
+      "type": "text"
+    }
+  }
+]
