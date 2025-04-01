@@ -252,6 +252,14 @@
     }
   });
 
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const generatorBtn = document.querySelector('[data-tab="tab-generator"]');
+  if (generatorBtn) {
+    generatorBtn.addEventListener("click", loadAkinatorQuestions);
+  }
+});
 </script>
 <section class="tab-content" id="tab-generator" style="display: block;"><div id="akinator-section" style="margin-top: 40px;">
 <h3>🧠 Анализ пароля (Акинатор)</h3>
