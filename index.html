@@ -222,7 +222,7 @@
     let akinatorBool = {}, akinatorText = {}, akinatorFollowups = [];
 
     async function loadAkinatorQuestions() {
-      const res = await fetch("http://localhost:8000/get-questions");
+      const res = await fetch("https://safepassai-landing.onrender.com//get-questions");
       const data = await res.json();
       const container = document.getElementById("akinator-questions");
       container.innerHTML = '';
@@ -239,7 +239,7 @@
     }
 
     async function submitAkinator() {
-      const res = await fetch("http://localhost:8000/get-followups", {
+      const res = await fetch("https://safepassai-landing.onrender.com//get-followups", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(akinatorBool),
@@ -264,7 +264,7 @@
     }
 
     async function guessAkinatorPasswords() {
-      const res = await fetch("http://localhost:8000/guess-passwords", {
+      const res = await fetch("https://safepassai-landing.onrender.com//guess-passwords", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ bools: akinatorBool, texts: akinatorText }),
