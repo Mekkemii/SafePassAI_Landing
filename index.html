@@ -244,6 +244,14 @@
     // Автозагрузка
     loadAkinatorQuestions();
 
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const generatorBtn = document.querySelector('[data-tab="tab-generator"]');
+    if (generatorBtn) {
+      generatorBtn.addEventListener("click", loadAkinatorQuestions);
+    }
+  });
+
 </script>
 <section class="tab-content" id="tab-generator" style="display: block;"></section></body>
 </html>
