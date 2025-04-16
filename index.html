@@ -79,15 +79,7 @@
     </section>
 
     <section id="tab-generator" class="tab-content">
-      <h2>Генератор персонального пароля</h2>
-      <p>На основе вашего имени, города и года рождения мы сгенерируем 10 вероятных паролей. Если среди них окажется ваш — рекомендуем немедленно его изменить!</p>
-      <form id="wordlistForm">
-        <input type="text" id="nameInput" placeholder="Имя" required />
-        <input type="text" id="cityInput" placeholder="Город" required />
-        <input type="text" id="yearInput" placeholder="Год рождения" required />
-        <button type="submit">Сгенерировать</button>
-      </form>
-      <div id="wordlistResult"></div>
+      
     
 <div id="akinator-section" style="margin-top: 40px;">
   <h3>🧠 Анализ пароля (Акинатор)</h3>
@@ -222,7 +214,7 @@
     let akinatorBool = {}, akinatorText = {}, akinatorFollowups = [];
 
     async function loadAkinatorQuestions() {
-      const res = await fetch("http://localhost:8000/get-questions");
+      const res = await fetch("https://safepassai-landing.onrender.com/get-questions");
       const data = await res.json();
       const container = document.getElementById("akinator-questions");
       container.innerHTML = '';
@@ -239,7 +231,7 @@
     }
 
     async function submitAkinator() {
-      const res = await fetch("http://localhost:8000/get-followups", {
+      const res = await fetch("https://safepassai-landing.onrender.com/get-followups", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(akinatorBool),
@@ -264,7 +256,7 @@
     }
 
     async function guessAkinatorPasswords() {
-      const res = await fetch("http://localhost:8000/guess-passwords", {
+      const res = await fetch("https://safepassai-landing.onrender.com/guess-passwords", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ bools: akinatorBool, texts: akinatorText }),
@@ -290,6 +282,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+
+document.addEventListener('DOMContentLoaded', () => {
+  const generatorBtn = document.querySelector('[data-tab="tab-generator"]');
+  if (generatorBtn) {
+    generatorBtn.addEventListener("click", loadAkinatorQuestions);
+  }
+});
 </script>
+
 </body>
 </html>
